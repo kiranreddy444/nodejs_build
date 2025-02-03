@@ -22,6 +22,11 @@ This is a repository for learning Node.js. It contains a collection of resources
 - [Node.js Use Cases](#nodejs-use-cases)
 - [Node.js Advantages](#nodejs-advantages)
 - [Node.js Disadvantages](#nodejs-disadvantages)
+- [Hello World](#hello-world)
+  - [REPL](#repl)
+  - [Command Line Arguments](#command-line-arguments)  
+  - [Environment Variables](#environment-variables)
+  - [Global Objects](#global-objects)
 - [NPM](#npm)
   - [Installation of NPM](#installation-of-npm)
   - [Usage](#usage)
@@ -86,10 +91,12 @@ This is a repository for learning Node.js. It contains a collection of resources
   - [Network I/O](#network-io)
   - [Timers](#timers)
 - [Promises](#promises)
+  - [Chaining Promises](#chaining-promises)
 - [Creating a Node Server](#creating-a-node-server)
   - [JSON Responses](#json-responses)
   - [HTML Responses](#html-responses)
   - [HTML Templates](#html-templates)
+  - [HTTP Routing](#http-routing)
 - [Web Framework](#web-framework)
   - [Libraries and Frameworks](#libraries-and-frameworks)
 - [Express](#express)
@@ -120,6 +127,8 @@ This is a repository for learning Node.js. It contains a collection of resources
 - [Test Driven Development](#test-driven-development)
 - [Deployment](#deployment)
 - [Security](#security)
+- [Security Guidelines](#security-guidelines)
+- [Performance Optimization](#performance-optimization)
 - [Performance](#performance)
 - [Scalability](#scalability)
 - [Design Patterns](#design-patterns)
@@ -135,6 +144,9 @@ This is a repository for learning Node.js. It contains a collection of resources
 - [TypeScript](#typescript)
 - [ES6](#es6)
 - [Best Practices](#best-practices)
+- [Clean Code](#clean-code)
+- [Interview Questions](#interview-questions)
+- [Resources](#resources)
 
 ## Introduction
 
@@ -142,9 +154,20 @@ This is a repository for learning Node.js. It contains a collection of resources
 - Node.js lets developers use JavaScript to write command line tools and for server-side scripting.
 - Node.js represents a "JavaScript everywhere" paradigm, unifying web application development around a single programming language, rather than different languages for server- and client-side scripts.
 
+    ```javascript
+    console.log('Hello from Node.js!');
+    ```
+
 ## Prerequisites
 
 - Before you start learning Node.js, you should have a basic understanding of JavaScript.
+
+    ```javascript
+    const greet = (name) => `Hello, ${name}!`;
+    console.log(greet('World'));
+    ```
+
+[BacK to Top⤴️](#table-of-contents)
 
 ## Environment Setup
 
@@ -214,9 +237,16 @@ This is a repository for learning Node.js. It contains a collection of resources
     npm -v # should print `10.7.0`
     ```
 
+[BacK to Top⤴️](#table-of-contents)
+
 ## ECMAScript
 
 - ECMAScript is the standard upon which JavaScript is based, and it's often abbreviated to ES.
+
+    ```javascript
+    const sum = (a, b) => a + b;
+    console.log(sum(1, 2)); // 3
+    ```
 
 ### ES5 (ES2009)
 
@@ -257,6 +287,8 @@ This is a repository for learning Node.js. It contains a collection of resources
 - It uses a non-blocking, event-driven I/O model.
 - It is lightweight and efficient.
 
+[BacK to Top⤴️](#table-of-contents)
+
 ## Node.js Applications
 
 - Web Applications
@@ -264,6 +296,8 @@ This is a repository for learning Node.js. It contains a collection of resources
 - RESTful API Applications
 - Microservices
 - CRON Jobs
+
+[BacK to Top⤴️](#table-of-contents)
 
 ## Node.js Use Cases
 
@@ -287,6 +321,8 @@ This is a repository for learning Node.js. It contains a collection of resources
 - Unhandled Exceptions
 - Single Threaded
 - Not Suitable for CPU Intensive Tasks
+
+[BacK to Top⤴️](#table-of-contents)
 
 ## Hello World
 
@@ -312,7 +348,7 @@ console.log('Hello, World!');
 
     ```javascript
     process.argv.forEach((val, index) => {
-    console.log(`${index}: ${val}`);
+        console.log(`${index}: ${val}`);
     });
     ```
 
@@ -332,6 +368,8 @@ console.log('Hello, World!');
     console.log(__dirname);
     console.log(__filename);
     ```
+
+[BacK to Top⤴️](#table-of-contents)
 
 ## NPM
 
@@ -359,19 +397,19 @@ console.log('Hello, World!');
 
     ```json
     {
-    "name": "my-app",
-    "version": "1.0.0",
-    "description": "My first Node.js app",
-    "main": "index.js",
-    "scripts": {
-        "start": "node index.js"
-    },
-    "dependencies": {
-        "express": "^4.17.1"
-    },
-    "devDependencies": {
-        "jest": "^26.6.3"
-    }
+        "name": "my-app",
+        "version": "1.0.0",
+        "description": "My first Node.js app",
+        "main": "index.js",
+        "scripts": {
+            "start": "node index.js"
+        },
+        "dependencies": {
+            "express": "^4.17.1"
+        },
+        "devDependencies": {
+            "jest": "^26.6.3"
+        }
     }
     ```
 
@@ -382,9 +420,9 @@ console.log('Hello, World!');
 
     ```json
     {
-    "dependencies": {
-        "express": "^4.17.1"
-    }
+        "dependencies": {
+            "express": "^4.17.1"
+        }
     }
     ```
 
@@ -396,10 +434,10 @@ console.log('Hello, World!');
 
     ```json
     {
-    "scripts": {
-        "start": "node index.js",
-        "test": "jest"
-    }
+        "scripts": {
+            "start": "node index.js",
+            "test": "jest"
+        }
     }
     ```
 
@@ -441,6 +479,8 @@ console.log('Hello, World!');
     npm search express
     npm list
     ```
+
+[BacK to Top⤴️](#table-of-contents)
 
 ## Modules
 
@@ -550,7 +590,7 @@ console.log('Hello, World!');
 
     ```javascript
     (function (exports, require, module, __filename, __dirname) {
-    // Your code here
+        // Your code here
     });
     ```
 
@@ -593,8 +633,8 @@ console.log('Hello, World!');
     ```javascript
     // data.json
     {
-    "name": "John Doe",
-    "email": "john.doe@gmail.com"
+        "name": "John Doe",
+        "email": "john.doe@gmail.com"
     }
 
     // index.js
@@ -681,9 +721,9 @@ console.log('Hello, World!');
     const zlib = require('zlib');
     const input = 'Hello, World!';
     zlib.deflate(input, (err, buffer) => {
-    if (!err) {
-        console.log(buffer.toString('base64'));
-    }
+        if (!err) {
+            console.log(buffer.toString('base64'));
+        }
     });
     ```
 
@@ -705,9 +745,9 @@ console.log('Hello, World!');
     ```javascript
     const { exec } = require('child_process');
     exec('ls -la', (err, stdout, stderr) => {
-    if (!err) {
-        console.log(stdout);
-    }
+        if (!err) {
+            console.log(stdout);
+        }
     });
     ```
 
@@ -721,24 +761,26 @@ console.log('Hello, World!');
     const numCPUs = require('os').cpus().length;
 
     if (cluster.isMaster) {
-    console.log(`Master ${process.pid} is running`);
+        console.log(`Master ${process.pid} is running`);
 
-    for (let i = 0; i < numCPUs; i++) {
-        cluster.fork();
-    }
+        for (let i = 0; i < numCPUs; i++) {
+            cluster.fork();
+        }
 
-    cluster.on('exit', (worker, code, signal) => {
-        console.log(`Worker ${worker.process.pid} died`);
-    }
+        cluster.on('exit', (worker, code, signal) => {
+            console.log(`Worker ${worker.process.pid} died`);
+        }
     } else {
-    http.createServer((req, res) => {
-        res.writeHead(200);
-        res.end('Hello, World!');
-    }).listen(8000);
+        http.createServer((req, res) => {
+            res.writeHead(200);
+            res.end('Hello, World!');
+        }).listen(8000);
 
-    console.log(`Worker ${process.pid} started`);
+        console.log(`Worker ${process.pid} started`);
     }
     ```
+
+[BacK to Top⤴️](#table-of-contents)
 
 ## Callback Pattern
 
@@ -748,10 +790,12 @@ console.log('Hello, World!');
     ```javascript
     const fs = require('fs');
     fs.readFile('file.txt', 'utf8', (err, data) => {
-    if (err) throw err;
-    console.log(data);
+        if (err) throw err;
+        console.log(data);
     });
     ```
+
+[BacK to Top⤴️](#table-of-contents)
 
 ## Events
 
@@ -767,7 +811,7 @@ console.log('Hello, World!');
     const myEmitter = new EventEmitter();
 
     myEmitter.on('event', () => {
-    console.log('an event occurred!');
+        console.log('an event occurred!');
     });
 
     myEmitter.emit('event');
@@ -787,16 +831,20 @@ console.log('Hello, World!');
     const myEmitter = new MyEmitter();
 
     myEmitter.on('event', () => {
-    console.log('an event occurred!');
+        console.log('an event occurred!');
     });
 
     myEmitter.emit('event');
     ```
 
+[BacK to Top⤴️](#table-of-contents)
+
 ## Character Sets and Encoding
 
 - A character set is a set of characters that can be used in a language.
 - An encoding is a mapping from a character set to a sequence of bytes.
+
+[BacK to Top⤴️](#table-of-contents)
 
 ## Streams
 
@@ -809,6 +857,8 @@ console.log('Hello, World!');
     read.pipe(write);
     ```
 
+[BacK to Top⤴️](#table-of-contents)
+
 ## Buffers
 
 - A buffer is a temporary memory location for data when it is being moved from one place to another.
@@ -819,6 +869,8 @@ console.log('Hello, World!');
     console.log(buffer.toString());
     ```
 
+[BacK to Top⤴️](#table-of-contents)
+
 ## Asynchronous JavaScript
 
 - Asynchronous JavaScript is a programming pattern that provides non-blocking I/O operations.
@@ -827,10 +879,12 @@ console.log('Hello, World!');
     ```javascript
     const fs = require('fs');
     fs.readFile('file.txt', 'utf8', (err, data) => {
-    if (err) throw err;
-    console.log(data);
+        if (err) throw err;
+        console.log(data);
     });
     ```
+
+[BacK to Top⤴️](#table-of-contents)
 
 ## File System
 
@@ -844,8 +898,8 @@ console.log('Hello, World!');
     ```javascript
     const fs = require('fs');
     fs.readFile('file.txt', 'utf8', (err, data) => {
-    if (err) throw err;
-    console.log(data);
+        if (err) throw err;
+        console.log(data);
     });
     ```
 
@@ -856,8 +910,8 @@ console.log('Hello, World!');
     ```javascript
     const fs = require('fs');
     fs.writeFile('file.txt', 'Hello, World!', (err) => {
-    if (err) throw err;
-    console.log('The file has been saved!');
+        if (err) throw err;
+        console.log('The file has been saved!');
     });
     ```
 
@@ -868,8 +922,8 @@ console.log('Hello, World!');
     ```javascript
     const fs = require('fs');
     fs.unlink('file.txt', (err) => {
-    if (err) throw err;
-    console.log('The file has been deleted!');
+        if (err) throw err;
+        console.log('The file has been deleted!');
     });
     ```
 
@@ -880,10 +934,12 @@ console.log('Hello, World!');
     ```javascript
     const fs = require('fs');
     fs.rename('file.txt', 'newfile.txt', (err) => {
-    if (err) throw err;
-    console.log('The file has been renamed!');
+        if (err) throw err;
+        console.log('The file has been renamed!');
     });
     ```
+
+[BacK to Top⤴️](#table-of-contents)
 
 ## Pipes
 
@@ -895,6 +951,8 @@ console.log('Hello, World!');
     const write = fs.createWriteStream('copy.txt');
     read.pipe(write);
     ```
+
+[BacK to Top⤴️](#table-of-contents)
 
 ## HTTP
 
@@ -908,7 +966,7 @@ console.log('Hello, World!');
     ```javascript
     const http = require('http');
     const server = http.createServer((req, res) => {
-    res.end('Hello, World!');
+        res.end('Hello, World!');
     });
     server.listen(3000);
     ```
@@ -920,8 +978,8 @@ console.log('Hello, World!');
     ```javascript
     const http = require('http');
     const server = http.createServer((req, res) => {
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    res.end('Hello, World!');
+        res.writeHead(200, { 'Content-Type': 'text/plain' });
+        res.end('Hello, World!');
     });
     server.listen(3000);
     ```
@@ -934,17 +992,17 @@ console.log('Hello, World!');
     const http = require('http');
     const url = require('url');
     const server = http.createServer((req, res) => {
-    const path = url.parse(req.url).pathname;
-    if (path === '/') {
-        res.writeHead(200, { 'Content-Type': 'text/plain' });
-        res.end('Home Page');
-    } else if (path === '/about') {
-        res.writeHead(200, { 'Content-Type': 'text/plain' });
-        res.end('About Page');
-    } else {
-        res.writeHead(404, { 'Content-Type': 'text/plain' });
-        res.end('Not Found');
-    }
+        const path = url.parse(req.url).pathname;
+        if (path === '/') {
+            res.writeHead(200, { 'Content-Type': 'text/plain' });
+            res.end('Home Page');
+        } else if (path === '/about') {
+            res.writeHead(200, { 'Content-Type': 'text/plain' });
+            res.end('About Page');
+        } else {
+            res.writeHead(404, { 'Content-Type': 'text/plain' });
+            res.end('Not Found');
+        }
     });
     server.listen(3000);
     ```
@@ -958,8 +1016,8 @@ console.log('Hello, World!');
     const url = require('url');
     const server = http.createServer((req, res) => {
     const query = url.parse(req.url, true).query;
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    res.end(`Hello, ${query.name}!`);
+        res.writeHead(200, { 'Content-Type': 'text/plain' });
+        res.end(`Hello, ${query.name}!`);
     });
     server.listen(3000);
     ```
@@ -971,8 +1029,8 @@ console.log('Hello, World!');
     ```javascript
     const http = require('http');
     const server = http.createServer((req, res) => {
-    res.writeHead(301, { 'Location': 'http://example.com' });
-    res.end();
+        res.writeHead(301, { 'Location': 'http://example.com' });
+        res.end();
     });
     server.listen(3000);
     ```
@@ -980,6 +1038,8 @@ console.log('Hello, World!');
 ## Thread
 
 - Node.js is a single-threaded application, but it can support concurrency via the concept of an event loop.
+
+[BacK to Top⤴️](#table-of-contents)
 
 ## libuv
 
@@ -989,10 +1049,12 @@ console.log('Hello, World!');
     ```javascript
     const fs = require('fs');
     fs.readFile('file.txt', 'utf8', (err, data) => {
-    if (err) throw err;
-    console.log(data);
+        if (err) throw err;
+        console.log(data);
     });
     ```
+
+[BacK to Top⤴️](#table-of-contents)
 
 ## Worker Threads
 
@@ -1002,17 +1064,19 @@ console.log('Hello, World!');
     const { Worker, isMainThread, parentPort } = require('worker_threads');
 
     if (isMainThread) {
-    const worker = new Worker(__filename);
-    worker.on('message', (message) => {
-        console.log(message);
-    });
-    worker.postMessage('Hello, World!');
+        const worker = new Worker(__filename);
+        worker.on('message', (message) => {
+            console.log(message);
+        });
+        worker.postMessage('Hello, World!');
     } else {
-    parentPort.on('message', (message) => {
-        parentPort.postMessage(message);
-    });
+        parentPort.on('message', (message) => {
+            parentPort.postMessage(message);
+        });
     }
     ```
+
+[BacK to Top⤴️](#table-of-contents)
 
 ## Queue
 
@@ -1020,29 +1084,29 @@ console.log('Hello, World!');
 
     ```javascript
     class Queue {
-    constructor() {
-        this.items = [];
-    }
+        constructor() {
+            this.items = [];
+        }
 
-    enqueue(element) {
-        this.items.push(element);
-    }
+        enqueue(element) {
+            this.items.push(element);
+        }
 
-    dequeue() {
-        return this.items.shift();
-    }
+        dequeue() {
+            return this.items.shift();
+        }
 
-    front() {
-        return this.items[0];
-    }
+        front() {
+            return this.items[0];
+        }
 
-    isEmpty() {
-        return this.items.length === 0;
-    }
+        isEmpty() {
+            return this.items.length === 0;
+        }
 
-    print() {
-        console.log(this.items.toString());
-    }
+        print() {
+            console.log(this.items.toString());
+        }
     }
 
     const queue = new Queue();
@@ -1062,11 +1126,11 @@ console.log('Hello, World!');
     console.log('Start');
 
     setTimeout(() => {
-    console.log('Timeout');
+        console.log('Timeout');
     }, 0);
 
     Promise.resolve().then(() => {
-    console.log('Promise');
+        console.log('Promise');
     });
 
     console.log('End');
@@ -1080,7 +1144,7 @@ console.log('Hello, World!');
     console.log('Start');
 
     setTimeout(() => {
-    console.log('Timeout');
+        console.log('Timeout');
     }, 0);
 
     console.log('End');
@@ -1093,8 +1157,8 @@ console.log('Hello, World!');
     ```javascript
     const fs = require('fs');
     fs.readFile('file.txt', 'utf8', (err, data) => {
-    if (err) throw err;
-    console.log(data);
+        if (err) throw err;
+        console.log(data);
     });
     ```
 
@@ -1104,7 +1168,7 @@ console.log('Hello, World!');
 
     ```javascript
     setImmediate(() => {
-    console.log('Immediate');
+        console.log('Immediate');
     });
 
     console.log('End');
@@ -1118,7 +1182,7 @@ console.log('Hello, World!');
     const server = require('http').createServer();
     server.listen(3000);
     server.close(() => {
-    console.log('Server closed');
+        console.log('Server closed');
     });
     ```
 
@@ -1129,8 +1193,8 @@ console.log('Hello, World!');
     ```javascript
     const fs = require('fs');
     fs.readFile('file.txt', 'utf8', (err, data) => {
-    if (err) throw err;
-    console.log(data);
+        if (err) throw err;
+        console.log(data);
     });
     ```
 
@@ -1149,9 +1213,11 @@ console.log('Hello, World!');
 
     ```javascript
     setTimeout(() => {
-    console.log('Timeout');
+        console.log('Timeout');
     }, 1000);
     ```
+
+[BacK to Top⤴️](#table-of-contents)
 
 ## Promises
 
@@ -1159,13 +1225,13 @@ console.log('Hello, World!');
 
     ```javascript
     const promise = new Promise((resolve, reject) => {
-    setTimeout(() => {
-        resolve('Hello, World!');
-    }, 1000);
+        setTimeout(() => {
+            resolve('Hello, World!');
+        }, 1000);
     });
 
     promise.then((value) => {
-    console.log(value);
+        console.log(value);
     });
     ```
 
@@ -1175,17 +1241,19 @@ console.log('Hello, World!');
 
     ```javascript
     const promise = new Promise((resolve, reject) => {
-    setTimeout(() => {
-        resolve('Hello,');
-    }, 1000);
+        setTimeout(() => {
+            resolve('Hello,');
+        }, 1000);
     });
 
     promise.then((value) => {
-    return value + ' World!';
-    }).then((value) => {
-    console.log(value);
+        return value + ' World!';
+        }).then((value) => {
+            console.log(value);
     });
     ```
+
+[BacK to Top⤴️](#table-of-contents)
 
 ## Creating a Node Server
 
@@ -1194,7 +1262,7 @@ console.log('Hello, World!');
     ```javascript
     const http = require('http');
     const server = http.createServer((req, res) => {
-    res.end('Hello, World!');
+        res.end('Hello, World!');
     });
     server.listen(3000);
     ```
@@ -1206,8 +1274,8 @@ console.log('Hello, World!');
     ```javascript
     const http = require('http');
     const server = http.createServer((req, res) => {
-    res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({ message: 'Hello, World!' }));
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'Hello, World!' }));
     });
     server.listen(3000);
     ```
@@ -1219,8 +1287,8 @@ console.log('Hello, World!');
     ```javascript
     const http = require('http');
     const server = http.createServer((req, res) => {
-    res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.end('<h1>Hello, World!</h1>');
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.end('<h1>Hello, World!</h1>');
     });
     server.listen(3000);
     ```
@@ -1232,11 +1300,11 @@ console.log('Hello, World!');
     ```javascript
     const http = require('http');
     const server = http.createServer((req, res) => {
-    res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.end(`
-        <h1>Hello, World!</h1>
-        <p>${new Date()}</p>
-    `);
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.end(`
+            <h1>Hello, World!</h1>
+            <p>${new Date()}</p>
+        `);
     });
     server.listen(3000);
     ```
@@ -1249,20 +1317,22 @@ console.log('Hello, World!');
     const http = require('http');
     const url = require('url');
     const server = http.createServer((req, res) => {
-    const path = url.parse(req.url).pathname;
-    if (path === '/') {
-        res.writeHead(200, { 'Content-Type': 'text/plain' });
-        res.end('Home Page');
-    } else if (path === '/about') {
-        res.writeHead(200, { 'Content-Type': 'text/plain' });
-        res.end('About Page');
-    } else {
-        res.writeHead(404, { 'Content-Type': 'text/plain' });
-        res.end('Not Found');
-    }
+        const path = url.parse(req.url).pathname;
+        if (path === '/') {
+            res.writeHead(200, { 'Content-Type': 'text/plain' });
+            res.end('Home Page');
+        } else if (path === '/about') {
+            res.writeHead(200, { 'Content-Type': 'text/plain' });
+            res.end('About Page');
+        } else {
+            res.writeHead(404, { 'Content-Type': 'text/plain' });
+            res.end('Not Found');
+        }
     });
     server.listen(3000);
     ```
+
+[BacK to Top⤴️](#table-of-contents)
 
 ## Web Framework
 
@@ -1277,6 +1347,8 @@ console.log('Hello, World!');
   - Hapi
   - Nest
   - Fastify
+
+[BacK to Top⤴️](#table-of-contents)
 
 ## Express
 
@@ -1295,7 +1367,7 @@ console.log('Hello, World!');
     const express = require('express');
     const app = express();
     app.get('/', (req, res) => {
-    res.send('Hello, World!');
+        res.send('Hello, World!');
     });
     app.listen(3000);
     ```
@@ -1307,13 +1379,16 @@ console.log('Hello, World!');
     ```javascript
     const express = require('express');
     const app = express();
+
     app.use((req, res, next) => {
-    console.log('Time:', Date.now());
-    next();
+        console.log('Time:', Date.now());
+        next();
     });
+
     app.get('/', (req, res) => {
-    res.send('Hello, World!');
+        res.send('Hello, World!');
     });
+
     app.listen(3000);
     ```
 
@@ -1324,12 +1399,15 @@ console.log('Hello, World!');
     ```javascript
     const express = require('express');
     const app = express();
+
     app.get('/', (req, res) => {
-    res.send('Home Page');
+        res.send('Home Page');
     });
+
     app.get('/about', (req, res) => {
-    res.send('About Page');
+        res.send('About Page');
     });
+    
     app.listen(3000);
     ```
 
@@ -1340,10 +1418,12 @@ console.log('Hello, World!');
     ```javascript
     const express = require('express');
     const app = express();
+
     app.set('view engine', 'pug');
     app.get('/', (req, res) => {
-    res.render('index', { title: 'Express' });
+        res.render('index', { title: 'Express' });
     });
+    
     app.listen(3000);
     ```
 
@@ -1354,6 +1434,7 @@ console.log('Hello, World!');
     ```javascript
     const express = require('express');
     const app = express();
+    
     app.use(express.static('public'));
     app.listen(3000);
     ```
@@ -1365,12 +1446,16 @@ console.log('Hello, World!');
     ```javascript
     const express = require('express');
     const app = express();
+
     app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Something broke!');
+        console.error(err.stack);
+        res.status(500).send('Something broke!');
     });
+    
     app.listen(3000);
     ```
+
+[BacK to Top⤴️](#table-of-contents)
 
 ## RESTful API
 
@@ -1484,15 +1569,21 @@ console.log('Hello, World!');
   - `Actions` to perform operations on resources.
   - `Forms` to submit data to resources.
 
+[BacK to Top⤴️](#table-of-contents)
+
 ## MongoDB
 
 - MongoDB is a cross-platform document-oriented database program.
 - Classified as a NoSQL database program, MongoDB uses JSON-like documents with optional schemas.
 
+[BacK to Top⤴️](#table-of-contents)
+
 ## Mongoose
 
 - Mongoose is an Object Data Modeling (ODM) library for MongoDB and Node.js.
 - It manages relationships between data, provides schema validation, and is used to translate between objects in code and the representation of those objects in MongoDB.
+
+[BacK to Top⤴️](#table-of-contents)
 
 ## Unit Testing
 
@@ -1514,6 +1605,8 @@ test('adds 1 + 2 to equal 3', () => {
 });
 ```
 
+[BacK to Top⤴️](#table-of-contents)
+
 ## Integration Testing
 
 - Integration testing is the phase in software testing in which individual software modules are combined and tested as a group.
@@ -1525,7 +1618,7 @@ test('adds 1 + 2 to equal 3', () => {
     const app = express();
 
     app.get('/', (req, res) => {
-    res.send('Hello, World!');
+        res.send('Hello, World!');
     });
 
     module.exports = app;
@@ -1535,10 +1628,12 @@ test('adds 1 + 2 to equal 3', () => {
     const app = require('./app');
 
     test('GET /', async () => {
-    const response = await request(app).get('/');
-    expect(response.text).toBe('Hello, World!');
+        const response = await request(app).get('/');
+        expect(response.text).toBe('Hello, World!');
     });
     ```
+
+[BacK to Top⤴️](#table-of-contents)
 
 ## Test Driven Development
 
@@ -1555,13 +1650,15 @@ test('adds 1 + 2 to equal 3', () => {
     const add = require('./math');
 
     test('adds 1 + 2 to equal 3', () => {
-    expect(add(1, 2)).toBe(3);
+        expect(add(1, 2)).toBe(3);
     });
     ```
 
 ## Deployment
 
 - Deployment is the process of making a software system available for use.
+
+[BacK to Top⤴️](#table-of-contents)
 
 ## Security
 
@@ -1576,6 +1673,33 @@ test('adds 1 + 2 to equal 3', () => {
     app.use(helmet());
     ```
 
+[BacK to Top⤴️](#table-of-contents)
+
+## Security Guidelines
+
+### Authentication & Authorization
+
+- JWT implementation
+- OAuth2 integration
+- Role-based access control
+- Session management
+
+### Data Security
+
+- Input validation
+- Output encoding
+- SQL injection prevention
+- XSS protection
+
+### Infrastructure Security
+
+- HTTPS setup
+- Rate limiting
+- CORS configuration
+- Security headers
+
+[BacK to Top⤴️](#table-of-contents)
+
 ## Performance
 
 - Performance is a measure of how quickly a system performs a certain process or transaction.
@@ -1584,6 +1708,31 @@ test('adds 1 + 2 to equal 3', () => {
     ```bash
     pm2 start app.js
     ```
+
+[BacK to Top⤴️](#table-of-contents)
+
+## Performance Optimization
+
+### Memory Management
+
+- Memory leaks detection
+- Heap analysis
+- Garbage collection optimization
+- Memory monitoring
+
+### CPU Profiling
+
+- Blocking operations analysis
+- Hot code paths identification
+- Async operations optimization
+- Worker threads usage
+
+### Request Handling
+
+- Connection pooling
+- Request queuing
+- Response caching
+- Load balancing
 
 ## Scalability
 
@@ -1602,6 +1751,8 @@ test('adds 1 + 2 to equal 3', () => {
     pm2 scale app 2
     ```
 
+[BacK to Top⤴️](#table-of-contents)
+
 ## Design Patterns
 
 - Design patterns are typical solutions to common problems in software design.
@@ -1610,12 +1761,12 @@ test('adds 1 + 2 to equal 3', () => {
     ```javascript
     // Singleton Pattern
     class Singleton {
-    constructor() {
-        if (!Singleton.instance) {
-        Singleton.instance = this;
+        constructor() {
+            if (!Singleton.instance) {
+                Singleton.instance = this;
+            }
+            return Singleton.instance;
         }
-        return Singleton.instance;
-    }
     }
 
     const instance1 = new Singleton();
@@ -1623,6 +1774,8 @@ test('adds 1 + 2 to equal 3', () => {
 
     console.log(instance1 === instance2);
     ```
+
+[BacK to Top⤴️](#table-of-contents)
 
 ## Error Handling
 
@@ -1634,10 +1787,12 @@ test('adds 1 + 2 to equal 3', () => {
     const app = express();
 
     app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Something broke!');
+        console.error(err.stack);
+        res.status(500).send('Something broke!');
     });
     ```
+
+[BacK to Top⤴️](#table-of-contents)
 
 ## Logging
 
@@ -1647,17 +1802,19 @@ test('adds 1 + 2 to equal 3', () => {
     ```javascript
     const winston = require('winston');
     const logger = winston.createLogger({
-    level: 'info',
-    format: winston.format.json(),
-    defaultMeta: { service: 'user-service' },
-    transports: [
-        new winston.transports.File({ filename: 'error.log', level: 'error' }),
-        new winston.transports.File({ filename: 'combined.log' }),
-    ],
+        level: 'info',
+        format: winston.format.json(),
+        defaultMeta: { service: 'user-service' },
+        transports: [
+            new winston.transports.File({ filename: 'error.log', level: 'error' }),
+            new winston.transports.File({ filename: 'combined.log' }),
+        ],
     });
 
     logger.info('Hello, World!');
     ```
+
+[BacK to Top⤴️](#table-of-contents)
 
 ## Debugging
 
@@ -1704,6 +1861,8 @@ test('adds 1 + 2 to equal 3', () => {
     node --inspect --debug-brk --inspect-brk= app.js
     ```
 
+[BacK to Top⤴️](#table-of-contents)
+
 ## Monitoring
 
 - Monitoring is the process of observing and checking the progress or quality of a program over time.
@@ -1713,101 +1872,109 @@ test('adds 1 + 2 to equal 3', () => {
     pm2 monit
     ```
 
+[BacK to Top⤴️](#table-of-contents)
+
 ## CI/CD
 
 - Continuous Integration (CI) is the practice of merging all developer working copies to a shared mainline several times a day.
 - Continuous Deployment (CD) is a strategy for software releases wherein any code commit that passes the automated testing phase is automatically released into the production environment.
 
-```yaml
-name: CI
+    ```yaml
+    name: CI
 
-on:
-  push:
-    branches:
-      - main
-
-jobs:
-    build:
-        runs-on: ubuntu-latest
-    
-        steps:
-        - uses: actions/checkout@v2
-    
-        - name: Use Node.js
-        uses: actions/setup-node@v2
-        with:
-            node-version: '14'
-    
-        - name: Install Dependencies
-        run: npm install
-    
-        - name: Run Tests
-        run: npm test
-```
-
-```yaml
-name: CD
-
-on:
+    on:
     push:
         branches:
         - main
 
-jobs:
-    deploy:
-        runs-on: ubuntu-latest
+    jobs:
+        build:
+            runs-on: ubuntu-latest
+        
+            steps:
+            - uses: actions/checkout@v2
+        
+            - name: Use Node.js
+            uses: actions/setup-node@v2
+            with:
+                node-version: '14'
+        
+            - name: Install Dependencies
+            run: npm install
+        
+            - name: Run Tests
+            run: npm test
+    ```
 
-        steps:
-        - uses: actions/checkout@v2
+    ```yaml
+    name: CD
 
-        - name: Use Node.js
-        uses: actions/setup-node@v2
-        with:
-            node-version: '14'
+    on:
+        push:
+            branches:
+            - main
 
-        - name: Install Dependencies
-        run: npm install
+    jobs:
+        deploy:
+            runs-on: ubuntu-latest
 
-        - name: Build
-        run: npm run build
+            steps:
+            - uses: actions/checkout@v2
 
-        - name: Deploy
-        run: |
-            npm install -g pm2
-            pm2 start app.js
-```
+            - name: Use Node.js
+            uses: actions/setup-node@v2
+            with:
+                node-version: '14'
+
+            - name: Install Dependencies
+            run: npm install
+
+            - name: Build
+            run: npm run build
+
+            - name: Deploy
+            run: |
+                npm install -g pm2
+                pm2 start app.js
+    ```
+
+[BacK to Top⤴️](#table-of-contents)
 
 ## Docker
 
 - Docker is a set of platform as a service products that use OS-level virtualization to deliver software in packages called containers.
 - A Docker container image is a lightweight, standalone, executable package of software that includes everything needed to run a piece of software.
 
-```dockerfile
-# Dockerfile
-FROM node:14
+    ```dockerfile
+    # Dockerfile
+    FROM node:14
 
-WORKDIR /app
+    WORKDIR /app
 
-COPY package.json .
+    COPY package.json .
 
-RUN npm install
+    RUN npm install
 
-COPY . .
+    COPY . .
 
-EXPOSE 3000
+    EXPOSE 3000
 
-CMD ["node", "app.js"]
-```
+    CMD ["node", "app.js"]
+    ```
 
-```bash
-docker build -t my-app .
-docker run -p 3000:3000 my-app
-```
+    ```bash
+    docker build -t my-app .
+    docker run -p 3000:3000 my-app
+    ```
+
+[BacK to Top⤴️](#table-of-contents)
 
 ## Microservices
 
 - Microservices is a variant of the service-oriented architecture (SOA) architectural style that structures an application as a collection of loosely coupled services.
 - Each service is self-contained and should implement a single business capability.
+
+[BacK to Top⤴️](#table-of-contents)
 
 ## GraphQL
 
@@ -1818,23 +1985,25 @@ docker run -p 3000:3000 my-app
     const { ApolloServer, gql } = require('apollo-server');
 
     const typeDefs = gql`
-    type Query {
-        hello: String
-    }
+        type Query {
+            hello: String
+        }
     `;
 
     const resolvers = {
-    Query: {
-        hello: () => 'Hello, World!',
-    },
+        Query: {
+            hello: () => 'Hello, World!',
+        },
     };
 
     const server = new ApolloServer({ typeDefs, resolvers });
 
     server.listen().then(({ url }) => {
-    console.log(`Server ready at ${url}`);
+        console.log(`Server ready at ${url}`);
     });
     ```
+
+[BacK to Top⤴️](#table-of-contents)
 
 ## Websockets
 
@@ -1847,14 +2016,16 @@ docker run -p 3000:3000 my-app
     const io = require('socket.io')(server);
 
     io.on('connection', (socket) => {
-    console.log('a user connected');
-    socket.on('disconnect', () => {
-        console.log('user disconnected');
-    });
+        console.log('a user connected');
+        socket.on('disconnect', () => {
+            console.log('user disconnected');
+        });
     });
 
     server.listen(3000);
     ```
+
+[BacK to Top⤴️](#table-of-contents)
 
 ## TypeScript
 
@@ -1873,6 +2044,8 @@ docker run -p 3000:3000 my-app
     console.log(add(1, 2));
     ```
 
+[BacK to Top⤴️](#table-of-contents)
+
 ## ES6
 
 - ECMAScript 6, also known as ECMAScript 2015, is the latest version of the ECMAScript standard.
@@ -1884,9 +2057,9 @@ docker run -p 3000:3000 my-app
 
     // ES6 Classes
     class Math {
-    add(a, b) {
-        return a + b;
-    }
+        add(a, b) {
+            return a + b;
+        }
     }
 
     // ES6 Template Literals
@@ -1904,6 +2077,8 @@ docker run -p 3000:3000 my-app
     console.log(c);
     ```
 
+[BacK to Top⤴️](#table-of-contents)
+
 ## Best Practices
 
 - Best practices are a set of guidelines, ethics or ideas that represent the most efficient or prudent course of action.
@@ -1912,8 +2087,8 @@ docker run -p 3000:3000 my-app
     ```javascript
     // Error-First Callbacks
     fs.readFile('file.txt', (err, data) => {
-    if (err) throw err;
-    console.log(data);
+        if (err) throw err;
+        console.log(data);
     });
 
     // Event Emitters
@@ -1921,7 +2096,7 @@ docker run -p 3000:3000 my-app
     const myEmitter = new EventEmitter();
 
     myEmitter.on('event', () => {
-    console.log('an event occurred!');
+        console.log('an event occurred!');
     });
 
     myEmitter.emit('event');
@@ -1931,7 +2106,7 @@ docker run -p 3000:3000 my-app
     const readStream = fs.createReadStream('file.txt');
 
     readStream.on('data', (data) => {
-    console.log(data);
+        console.log(data);
     });
 
     // Middleware
@@ -1939,10 +2114,731 @@ docker run -p 3000:3000 my-app
     const app = express();
 
     app.use((req, res, next) => {
-    console.log('Time:', Date.now());
-    next();
+        console.log('Time:', Date.now());
+        next();
     });
     ```
+
+[BacK to Top⤴️](#table-of-contents)
+
+## Clean Code
+
+- Clean code is code that is easy to understand, easy to maintain, and easy to extend.
+
+    ```javascript
+    // Bad Code
+    const a = 1; // Variable a
+    const b = 2; // Variable b
+    const c = a + b; // Sum of a and b
+
+    // Good Code
+    const sum = (a, b) => a + b;
+    const a = 1;
+    const b = 2;
+    const c = sum(a, b);
+    ```
+
+[BacK to Top⤴️](#table-of-contents)
+
+## Interview Questions
+
+1. **What is Node.js?**
+    - Node.js is an open-source, cross-platform, JavaScript runtime environment that executes JavaScript code outside a web browser. It is built on Chrome's V8 JavaScript engine and uses an event-driven, non-blocking I/O model.
+
+        Code Example:
+
+        ```javascript
+        console.log('Hello from Node.js!');
+        
+        // Check Node.js version and environment
+        console.log(`Node.js Version: ${process.version}`);
+        console.log(`Platform: ${process.platform}`);
+        ```
+
+2. **How does Node.js handle asynchronous operations?**
+    - Node.js handles asynchronous operations using an event-driven architecture and the event loop. It uses callbacks, Promises, and async/await to manage asynchronous code execution.
+
+        Code Example:
+
+        ```javascript
+        // Callback example
+        const fs = require('fs');
+        fs.readFile('input.txt', 'utf8', (err, data) => {
+            if (err) throw err;
+            console.log(data);
+        });
+
+        // Promise example
+        const readFilePromise = () => {
+            return new Promise((resolve, reject) => {
+                fs.readFile('input.txt', 'utf8', (err, data) => {
+                    if (err) reject(err);
+                    resolve(data);
+                });
+            });
+        };
+
+        // Async/await example
+        async function readFileAsync() {
+            try {
+                const data = await readFilePromise();
+                console.log(data);
+            } catch (err) {
+                console.error(err);
+            }
+        }
+        ```
+
+3. **What are the differences between var, let, and const in Node.js?**
+    - `var` is function-scoped and can be redeclared. `let` and `const` are block-scoped; `let` can be reassigned, while `const` cannot be reassigned.
+
+    Code Example:
+
+    ```javascript
+    // Function scope with var
+    function varExample() {
+        var x = 1;
+        if (true) {
+            var x = 2;  // same variable
+            console.log(x);  // 2
+        }
+        console.log(x);  // 2
+    }
+
+    // Block scope with let
+    function letExample() {
+        let x = 1;
+        if (true) {
+            let x = 2;  // different variable
+            console.log(x);  // 2
+        }
+        console.log(x);  // 1
+    }
+
+    // Const example
+    const PI = 3.14;
+    // PI = 3.15;  // TypeError: Assignment to constant variable
+    ```
+
+4. **What is the event loop in Node.js?**
+    - The event loop is a mechanism that allows Node.js to perform non-blocking I/O operations by offloading operations to the system kernel whenever possible.
+
+        Code Example:
+
+        ```javascript
+        console.log('Start');
+
+        setTimeout(() => {
+            console.log('Timeout');
+        }, 0);
+
+        Promise.resolve().then(() => {
+            console.log('Promise');
+        });
+
+        console.log('End');
+
+        // Output: Start, End, Promise, Timeout
+        ```
+
+5. **Explain the concept of callbacks in Node.js.**
+    - A callback is a function passed into another function as an argument, which is then invoked inside the outer function to complete some kind of routine or action.
+
+        Code Example:
+
+        ```javascript
+        const fs = require('fs');
+        fs.readFile('input.txt', 'utf8', (err, data) => {
+            if (err) throw err;
+            console.log(data);
+        });
+        ```
+
+6. **What are streams in Node.js?**
+    - Streams are objects that let you read data from a source or write data to a destination in a continuous fashion. They are used to handle reading/writing files, network communications, or any kind of end-to-end information exchange.
+
+        Code Example:
+
+        ```javascript
+        const fs = require('fs');
+        const readStream = fs.createReadStream('file.txt');
+        const writeStream = fs.createWriteStream('copy.txt');
+        readStream.pipe(writeStream);
+        ```
+
+7. **How do you handle file operations in Node.js?**
+    - File operations in Node.js are handled using the `fs` module, which provides methods for reading, writing, deleting, and renaming files.
+
+        Code Example:
+
+        ```javascript
+        const fs = require('fs');
+
+        // Reading a file
+        fs.readFile('file.txt', 'utf8', (err, data) => {
+            if (err) throw err;
+            console.log(data);
+        });
+
+        // Writing to a file
+        fs.writeFile('file.txt', 'Hello, World!', (err) => {
+            if (err) throw err;
+            console.log('The file has been saved!');
+        });
+
+        // Deleting a file
+        fs.unlink('file.txt', (err) => {
+            if (err) throw err;
+            console.log('The file has been deleted!');
+        });
+
+        // Renaming a file
+        fs.rename('file.txt', 'newfile.txt', (err) => {
+            if (err) throw err;
+            console.log('The file has been renamed!');
+        });
+        ```
+
+8. **What are global objects in Node.js?**
+    - Global objects are objects that are available in all modules. Examples include `__dirname`, `__filename`, `process`, `Buffer`, and `global`.
+
+        Code Example:
+
+        ```javascript
+        console.log(__dirname);
+        console.log(__filename);
+        console.log(process.env);
+        console.log(Buffer.from('Hello, World!').toString());
+        ```
+
+9. **How do you export and import modules in Node.js?**
+    - Modules are exported using `module.exports` or `exports` and imported using `require()` for CommonJS modules. For ES6 modules, `export` and `import` are used.
+
+        Code Example:
+
+        ```javascript
+        // math.js
+        module.exports.add = (a, b) => a + b;
+
+        // index.js
+        const math = require('./math');
+        console.log(math.add(1, 2));
+
+        // ES6 Modules
+        // math.js
+        export const add = (a, b) => a + b;
+
+        // index.js
+        import { add } from './math';
+        console.log(add(1, 2));
+        ```
+
+10. **What is the difference between process.nextTick(), setImmediate(), and setTimeout()?**
+     - `process.nextTick()` schedules a callback to be invoked in the next iteration of the event loop. `setImmediate()` schedules a callback to be executed in the next iteration of the event loop after I/O events. `setTimeout()` schedules a callback to be executed after a specified delay.
+
+        Code Example:
+
+        ```javascript
+        console.log('Start');
+
+        process.nextTick(() => {
+            console.log('Next Tick');
+        });
+
+        setImmediate(() => {
+            console.log('Immediate');
+        });
+
+        setTimeout(() => {
+            console.log('Timeout');
+        }, 0);
+
+        console.log('End');
+        ```
+
+11. **What is middleware in Node.js? How is it used in Express.js?**
+     - Middleware functions are functions that have access to the request object, the response object, and the next middleware function in the application’s request-response cycle. In Express.js, middleware is used to handle requests, responses, and errors.
+
+        Code Example:
+
+        ```javascript
+        const express = require('express');
+        const app = express();
+
+        app.use((req, res, next) => {
+            console.log('Time:', Date.now());
+            next();
+        });
+
+        app.get('/', (req, res) => {
+            res.send('Hello, World!');
+        });
+
+        app.listen(3000);
+        ```
+
+12. **Explain the concept of Promises and async/await in Node.js.**
+     - Promises represent the eventual completion (or failure) of an asynchronous operation and its resulting value. `async/await` is syntactic sugar built on Promises, allowing asynchronous code to be written in a synchronous style.
+
+        Code Example:
+
+        ```javascript
+        // Promise example
+        const promise = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve('Hello, World!');
+            }, 1000);
+        });
+
+        promise.then((value) => {
+            console.log(value);
+        });
+
+        // Async/await example
+        async function asyncFunction() {
+            const value = await promise;
+            console.log(value);
+        }
+
+        asyncFunction();
+        ```
+
+13. **How do you handle errors in Node.js applications?**
+     - Errors in Node.js applications are handled using try-catch blocks, error-first callbacks, and error-handling middleware in Express.js.
+
+        Code Example:
+
+        ```javascript
+        // Try-catch block
+        try {
+            throw new Error('Something went wrong!');
+        } catch (err) {
+            console.error(err.message);
+        }
+
+        // Error-first callback
+        const fs = require('fs');
+        fs.readFile('file.txt', 'utf8', (err, data) => {
+            if (err) {
+                console.error(err.message);
+                return;
+            }
+            console.log(data);
+        });
+
+        // Error-handling middleware in Express.js
+        const express = require('express');
+        const app = express();
+
+        app.use((err, req, res, next) => {
+            console.error(err.stack);
+            res.status(500).send('Something broke!');
+        });
+
+        app.listen(3000);
+        ```
+
+14. **What is the difference between synchronous and asynchronous code in Node.js?**
+     - Synchronous code is executed sequentially, blocking the execution of subsequent code until the current operation completes. Asynchronous code allows other operations to continue before the current operation completes, using callbacks, Promises, or async/await.
+
+        Code Example:
+
+        ```javascript
+        // Synchronous code
+        const fs = require('fs');
+        const data = fs.readFileSync('file.txt', 'utf8');
+        console.log(data);
+
+        // Asynchronous code
+        fs.readFile('file.txt', 'utf8', (err, data) => {
+            if (err) throw err;
+            console.log(data);
+        });
+        ```
+
+15. **Explain the working of the cluster module in Node.js.**
+     - The cluster module allows you to create child processes (workers) that share the same server port, enabling the creation of a multi-process server to handle concurrent requests.
+
+        Code Example:
+
+        ```javascript
+        const cluster = require('cluster');
+        const http = require('http');
+        const numCPUs = require('os').cpus().length;
+
+        if (cluster.isMaster) {
+            console.log(`Master ${process.pid} is running`);
+
+            for (let i = 0; i < numCPUs; i++) {
+                cluster.fork();
+            }
+
+            cluster.on('exit', (worker, code, signal) => {
+                console.log(`Worker ${worker.process.pid} died`);
+            });
+        } else {
+            http.createServer((req, res) => {
+                res.writeHead(200);
+                res.end('Hello, World!');
+            }).listen(8000);
+
+            console.log(`Worker ${process.pid} started`);
+        }
+        ```
+
+16. **How do you secure a Node.js application?**
+     - Security measures include using HTTPS, validating and sanitizing user input, using environment variables for sensitive information, implementing authentication and authorization, and using security-related middleware like Helmet.
+
+        Code Example:
+
+        ```javascript
+        const express = require('express');
+        const helmet = require('helmet');
+        const app = express();
+
+        app.use(helmet());
+
+        app.get('/', (req, res) => {
+            res.send('Hello, World!');
+        });
+
+        app.listen(3000);
+        ```
+
+17. **What is the difference between require() and import in Node.js?**
+     - `require()` is used for CommonJS modules, while `import` is used for ES6 modules. `require()` is synchronous, while `import` is asynchronous and supports static analysis.
+
+        Code Example:
+
+        ```javascript
+        // CommonJS
+        const math = require('./math');
+        console.log(math.add(1, 2));
+
+        // ES6 Modules
+        import { add } from './math';
+        console.log(add(1, 2));
+        ```
+
+18. **What is the purpose of package.json and package-lock.json?**
+     - `package.json` contains metadata about the project and its dependencies. `package-lock.json` records the exact versions of dependencies installed, ensuring consistent installs across environments.
+
+        Code Example:
+
+        ```json
+        // package.json
+        {
+            "name": "my-app",
+            "version": "1.0.0",
+            "description": "My first Node.js app",
+            "main": "index.js",
+            "scripts": {
+                "start": "node index.js"
+            },
+            "dependencies": {
+                "express": "^4.17.1"
+            },
+            "devDependencies": {
+                "jest": "^26.6.3"
+            }
+        }
+
+        // package-lock.json
+        {
+            "name": "my-app",
+            "version": "1.0.0",
+            "lockfileVersion": 1,
+            "requires": true,
+            "dependencies": {
+                "express": {
+                    "version": "4.17.1",
+                    "resolved": "https://registry.npmjs.org/express/-/express-4.17.1.tgz",
+                    "integrity": "sha512-...",
+                    "requires": {
+                        "accepts": "~1.3.7",
+                        "array-flatten": "1.1.1",
+                        // ...other dependencies...
+                    }
+                },
+                // ...other dependencies...
+            }
+        }
+        ```
+
+19. **How do you manage environment variables in Node.js?**
+     - Environment variables are managed using the `process.env` object or by using packages like `dotenv` to load variables from a `.env` file.
+
+        Code Example:
+
+        ```javascript
+        // Using process.env
+        console.log(process.env.NODE_ENV);
+
+        // Using dotenv
+        require('dotenv').config();
+        console.log(process.env.DB_HOST);
+        ```
+
+20. **Explain the concept of CORS and how to handle it in Node.js.**
+     - CORS (Cross-Origin Resource Sharing) is a mechanism that allows restricted resources on a web page to be requested from another domain. It is handled in Node.js using the `cors` middleware.
+
+        Code Example:
+
+        ```javascript
+        const express = require('express');
+        const cors = require('cors');
+        const app = express();
+
+        app.use(cors());
+
+        app.get('/', (req, res) => {
+            res.send('Hello, World!');
+        });
+
+        app.listen(3000);
+        ```
+
+21. **How does Node.js achieve non-blocking I/O operations?**
+     - Node.js achieves non-blocking I/O operations using an event-driven architecture and the event loop, which offloads I/O operations to the system kernel.
+
+        Code Example:
+
+        ```javascript
+        const fs = require('fs');
+        fs.readFile('file.txt', 'utf8', (err, data) => {
+            if (err) throw err;
+            console.log(data);
+        });
+        ```
+
+22. **Explain the architecture of Node.js.**
+     - Node.js architecture is based on the event-driven, non-blocking I/O model. It uses the V8 JavaScript engine, libuv for asynchronous I/O, and a single-threaded event loop to handle multiple concurrent operations.
+
+        Code Example:
+
+        ```javascript
+        const http = require('http');
+        const server = http.createServer((req, res) => {
+            res.end('Hello, World!');
+        });
+        server.listen(3000);
+        ```
+
+23. **What are worker threads in Node.js, and when would you use them?**
+     - Worker threads are used to perform CPU-intensive JavaScript operations in parallel. They are used when you need to offload heavy computations from the main thread to improve performance.
+
+        Code Example:
+
+        ```javascript
+        const { Worker, isMainThread, parentPort } = require('worker_threads');
+
+        if (isMainThread) {
+            const worker = new Worker(__filename);
+            worker.on('message', (message) => {
+                console.log(message);
+            });
+            worker.postMessage('Hello, World!');
+        } else {
+            parentPort.on('message', (message) => {
+                parentPort.postMessage(message);
+            });
+        }
+        ```
+
+24. **How do you handle memory leaks in Node.js applications?**
+     - Memory leaks are handled by profiling the application using tools like Node.js built-in inspector, Chrome DevTools, or third-party tools like `heapdump` and `memwatch-next`.
+
+        Code Example:
+
+        ```javascript
+        // Profiling with Node.js built-in inspector
+        const inspector = require('inspector');
+        inspector.open(9229, 'localhost', true);
+
+        // Profiling with Chrome DevTools
+        console.log('Open chrome://inspect in Chrome to start profiling');
+        ```
+
+25. **Explain the difference between process and thread in Node.js.**
+     - A process is an instance of a program in execution, with its own memory space. A thread is a smaller unit of a process that can be scheduled for execution. Node.js uses a single-threaded event loop for handling asynchronous operations.
+
+        Code Example:
+
+        ```javascript
+        // Process example
+        console.log(`Process ID: ${process.pid}`);
+
+        // Thread example using worker threads
+        const { Worker, isMainThread, parentPort } = require('worker_threads');
+
+        if (isMainThread) {
+            const worker = new Worker(__filename);
+            worker.on('message', (message) => {
+                console.log(message);
+            });
+            worker.postMessage('Hello, World!');
+        } else {
+            parentPort.on('message', (message) => {
+                parentPort.postMessage(message);
+            });
+        }
+        ```
+
+26. **What are microservices, and how can they be implemented in Node.js?**
+     - Microservices are a design pattern where an application is composed of small, independent services that communicate over a network. They can be implemented in Node.js using frameworks like Express, Koa, or NestJS.
+
+        Code Example:
+
+        ```javascript
+        // User service
+        const express = require('express');
+        const app = express();
+
+        app.get('/users', (req, res) => {
+            res.json([{ id: 1, name: 'John Doe' }]);
+        });
+
+        app.listen(3001, () => {
+            console.log('User service running on port 3001');
+        });
+
+        // Order service
+        const express = require('express');
+        const app = express();
+
+        app.get('/orders', (req, res) => {
+            res.json([{ id: 1, user_id: 1, product: 'Laptop' }]);
+        });
+
+        app.listen(3002, () => {
+            console.log('Order service running on port 3002');
+        });
+        ```
+
+27. **Describe the role of event emitters in Node.js.**
+     - Event emitters are objects that can emit named events and register listeners for those events. They are used to handle asynchronous events in Node.js.
+
+        Code Example:
+
+        ```javascript
+        const EventEmitter = require('events');
+        const myEmitter = new EventEmitter();
+
+        myEmitter.on('event', () => {
+            console.log('an event occurred!');
+        });
+
+        myEmitter.emit('event');
+        ```
+
+28. **What are the performance optimization techniques for Node.js applications?**
+     - Techniques include using asynchronous code, optimizing database queries, using caching, load balancing, clustering, and profiling the application to identify bottlenecks.
+
+        Code Example:
+
+        ```javascript
+        // Asynchronous code
+        const fs = require('fs');
+        fs.readFile('file.txt', 'utf8', (err, data) => {
+            if (err) throw err;
+            console.log(data);
+        });
+
+        // Caching
+        const cache = {};
+        function getData(key) {
+            if (cache[key]) {
+                return cache[key];
+            }
+            const data = fetchDataFromDatabase(key);
+            cache[key] = data;
+            return data;
+        }
+        ```
+
+29. **How do you implement rate limiting in Node.js?**
+     - Rate limiting can be implemented using middleware like `express-rate-limit` to limit the number of requests a client can make to an API within a specified time frame.
+
+        Code Example:
+
+        ```javascript
+        const express = require('express');
+        const rateLimit = require('express-rate-limit');
+        const app = express();
+
+        const limiter = rateLimit({
+            windowMs: 15 * 60 * 1000, // 15 minutes
+            max: 100 // limit each IP to 100 requests per windowMs
+        });
+
+        app.use(limiter);
+
+        app.get('/', (req, res) => {
+            res.send('Hello, World!');
+        });
+
+        app.listen(3000);
+        ```
+
+30. **Explain the difference between monolithic and distributed architectures in the context of Node.js.**
+     - A monolithic architecture is a single, unified codebase for the entire application. A distributed architecture, such as microservices, breaks the application into smaller, independent services that communicate over a network.
+
+        Code Example:
+
+        ```javascript
+        // Monolithic architecture
+        const express = require('express');
+        const app = express();
+
+        app.get('/users', (req, res) => {
+            res.json([{ id: 1, name: 'John Doe' }]);
+        });
+
+        app.get('/orders', (req, res) => {
+            res.json([{ id: 1, user_id: 1, product: 'Laptop' }]);
+        });
+
+        app.listen(3000, () => {
+            console.log('Server running on port 3000');
+        });
+
+        // Distributed architecture (microservices)
+        // User service
+        const express = require('express');
+        const app = express();
+
+        app.get('/users', (req, res) => {
+            res.json([{ id: 1, name: 'John Doe' }]);
+        });
+
+        app.listen(3001, () => {
+            console.log('User service running on port 3001');
+        });
+
+        // Order service
+        const express = require('express');
+        const app = express();
+
+        app.get('/orders', (req, res) => {
+            res.json([{ id: 1, user_id: 1, product: 'Laptop' }]);
+        });
+
+        app.listen(3002, () => {
+            console.log('Order service running on port 3002');
+        });
+        ```
+
+[BacK to Top⤴️](#table-of-contents)
+
+## Resources
+
+- [Node.js Documentation](https://nodejs.org/en/docs/)
+- [Express Documentation](https://expressjs.com/en/4x/api.html)
+- [MongoDB Documentation](https://docs.mongodb.com/)
+- [Mongoose Documentation](https://mongoosejs.com/docs/)
+- [Jest Documentation](https://jestjs.io/docs/en/getting-started)
+
+[BacK to Top⤴️](#table-of-contents)
 
 ## Connect with me
 
@@ -1952,6 +2848,8 @@ docker run -p 3000:3000 my-app
 - [Instagram](https://www.instagram.com/manthan_ank/)
 - [YouTube](https://www.youtube.com/@manthanank)
 - [GitHub](https://github.com/manthanank)
+
+[BacK to Top⤴️](#table-of-contents)
 
 ## Support
 
