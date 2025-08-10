@@ -12,19 +12,16 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'  # You can change this to 14, 16, etc.
+          node-version: '18'
 
       - name: Install dependencies
         run: npm install
 
-      # Optional: Run tests (you can skip this if not needed)
-      # - name: Run tests
-      #   run: npm test
-
       - name: Package application
         run: |
           mkdir staging
-          cp -r . staging/
+          shopt -s extglob
+          cp -r !(staging) staging/
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4.6.2
